@@ -1,6 +1,6 @@
 from card import Card
 import random
-
+import os
 
 # Gets the score of a player's hand
 def get_score(hand):
@@ -68,6 +68,8 @@ def game():
         user_cards = get_cards(user_hand)
         dealer_cards = get_cards(dealer_hand)
 
+        os.system('clear')  # clears the screen
+
         print("In your hand:")
         print(" ".join(str(card) for card in user_cards))
 
@@ -93,6 +95,7 @@ def game():
                         value[1] = 1
     dealer_score = get_score(dealer_hand)
 
+    os.system('clear')  # clears the screen
     print("Your final Hand:")
     print(" ".join(str(card) for card in user_cards))
 
@@ -116,4 +119,6 @@ def game():
     elif dealer_score > user_score:
         print("The Dealer got higher than you.\nYou Lose")
 
-game()
+
+if input("Do you want to begin the game? (y/n)") == 'y':
+     game()
