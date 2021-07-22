@@ -5,14 +5,28 @@ class Card:
 
 
     def __repr__(self):
-        self.card = """
- ┌─────────┐
- │{}        │
- │         │
- │         │
- │    {}    │
- │         │
- │         │
- │        {}│
- └─────────┘""". format(self.value, self.suit, self.value)
+        self.card = ""
+        if len(self.value) == 2:
+            self.card = """
+    ┌─────────┐
+    │{}       │
+    │         │
+    │         │
+    │    {}    │
+    │         │
+    │         │
+    │       {}│
+    └─────────┘""" .format(self.value, self.suit, self.value)
+        else:
+            self.card = """
+    ┌─────────┐
+    │{}        │
+    │         │
+    │         │
+    │    {}    │
+    │         │
+    │         │
+    │        {}│
+    └─────────┘""" .format(self.value, self.suit, self.value)
+
         return self.card
