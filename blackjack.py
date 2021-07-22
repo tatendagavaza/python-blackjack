@@ -1,6 +1,7 @@
 from card import Card
 import random
 
+
 # Gets the score of a player's hand
 def get_score(hand):
     score = 0
@@ -43,22 +44,35 @@ for suit in suits:
 user_hand = []
 user_cards = []
 
+dealer_hand = []
+dealer_cards = []
 
 def game():
     user_hand.append(random.choice(deck))
     user_hand.append(random.choice(deck))
     user_score = get_score(user_hand)
 
+    dealer_hand.append(random.choice(deck))
+    dealer_hand.append(random.choice(deck))
+    dealer_score = get_score(dealer_hand)
 
     should_continue = True
+    if dealer_score == 21:
+        should_continue = False
 
     user_over_21 = False
     while should_continue and not user_over_21:
         user_score = get_score(user_hand)
         user_cards = get_cards(user_hand)
+        dealer_cards = get_cards(dealer_hand)
+
         print("In your hand:")
         print(" ".join(str(card) for card in user_cards))
-        if input("Would you like another card? (y/n)") == 'y':
+
+        print("Dealer's first card:")
+        print(dealer_cards[0])
+
+        if input("Enter 'y' to get another card. Enter 'n' to pass: ") == 'y':
             user_hand.append(random.choice(deck))
             user_score = get_score(user_hand)
             if user_score > 21:
@@ -70,6 +84,15 @@ def game():
                         value[1] = 1
         else:
             should_continue = False
+    if dealer_score > 21:
+                ace, index = find_ace(dealer_hand)
+                if ace:
+                    for key, value in dealer_hand[index].items():
+                        value[1] = 1
+    dealer_score = get_score(dealer_hand)
+
+
+
     if user_over_21:
         print("You went over 21. You Lose")
 
